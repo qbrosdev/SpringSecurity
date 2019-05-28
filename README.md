@@ -6,7 +6,7 @@ This is a demo project for spring security and consists of three subprojects.
 
 A simple spring security demo which uses the default spring security configurations and an in-memory database for keeping track of username/passwords and roles. This demo performs basic HTTP authentication.
 
-#Forms
+# Forms
 
 Form-based authentication, using Thymeleaf
 
@@ -20,6 +20,6 @@ Access roles and other authentication and authorization information are bundled 
 
 Unlike JWT client (OAth2, OpenID connect), for establishing JWT server we have to do a lot more configurations.
 
-#JpaDB
+# JpaDB
 
 Customised HTTP basic authentication, using H2 database. 
