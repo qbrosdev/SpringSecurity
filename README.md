@@ -11,7 +11,7 @@ A simple spring security demo which uses the default spring security configurati
 Form-based authentication, using Thymeleaf
 
 
-# jwtServer
+# JwtServer
 
 > NOTE: it is not complete YET :(
 
