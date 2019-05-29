@@ -2,25 +2,29 @@ package com.qbros.securityJpaDb.persistance.entities.security;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import static com.qbros.securityJpaDb.persistance.entities.security.Role.Code.ADMIN_STR;
+import static com.qbros.securityJpaDb.persistance.entities.security.Role.Code.USER_STR;
+import static com.qbros.securityJpaDb.persistance.entities.security.Role.Code.VIEWER_STR;
+
 /**
  * Created by QBros on Zero Hour ... Hooah!
  */
 
 //https://stackoverflow.com/a/54713712/3593084
 public enum Role implements GrantedAuthority {
-    ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER"),
-    VIEWER("ROLE_VIEWER");
+    ADMIN(ADMIN_STR),
+    USER(USER_STR),
+    VIEWER(VIEWER_STR);
 
-    private final String authority;
+    private final String roleName;
 
-    Role(String authority) {
-        this.authority = authority;
+    Role(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
     public String getAuthority() {
-        return authority;
+        return "ROLE_" + roleName;
     }
 
     public class Code {

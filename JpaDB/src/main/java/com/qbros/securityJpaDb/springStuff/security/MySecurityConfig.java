@@ -39,8 +39,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 /*open api*/
                 .antMatchers("/open/**", h2ConsolePath + "/**").permitAll()
                 /*role base access api*/
-                .antMatchers("/secure/admin/**").hasAnyRole(Role.ADMIN.name())
-                .antMatchers("/secure/user/**").hasRole(Role.USER.name())
+                .antMatchers("/secure/admin/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/secure/user/**").hasAnyRole(Role.USER.name(),Role.ADMIN.name())
                 /*for accessing the rest of API, the users just need to be authentication (no specific role needed)*/
                 .anyRequest().authenticated()
                 //authentication mechanisms--------------------------------------------------------------------------
