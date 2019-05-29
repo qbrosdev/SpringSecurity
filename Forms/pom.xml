@@ -57,6 +57,16 @@
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
+
+        <!--For hot swap/fast deployment
+        Also,
+        #1 settings> compile>build projects automatically
+        #2 open registry https://stackoverflow.com/a/28419108/3593084
+        and then, compile.automake.allowWhenApprunning-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
