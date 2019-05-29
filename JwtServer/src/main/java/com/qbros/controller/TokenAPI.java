@@ -1,6 +1,6 @@
 package com.qbros.controller;
 
-import com.qbros.controller.dto.JwtRequest;
+import com.qbros.controller.dto.RequestJwtDTO;
 import com.qbros.jwtSecurity.jwtSecurity.MySecurityUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ public class TokenAPI {
     private MySecurityUtils mySecurityUtils;
 
     @PostMapping
-    public String generate(@RequestBody final JwtRequest jwtRequest) {
-        return mySecurityUtils.generateJwtToken(jwtRequest);
+    public String generate(@RequestBody final RequestJwtDTO requestJwtDTO) {
+        return mySecurityUtils.generateJwtToken(requestJwtDTO);
     }
 }

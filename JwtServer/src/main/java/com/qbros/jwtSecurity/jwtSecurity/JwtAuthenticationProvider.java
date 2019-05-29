@@ -1,7 +1,7 @@
 package com.qbros.jwtSecurity.jwtSecurity;
 
-import com.qbros.controller.dto.JwtAuthenticationToken;
-import com.qbros.controller.dto.JwtRequest;
+import com.qbros.controller.dto.Jwt;
+import com.qbros.controller.dto.RequestJwtDTO;
 import com.qbros.controller.dto.JwtUserDetails;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,21 +31,21 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
 
     @Override
     protected UserDetails retrieveUser(String s, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
-        JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) usernamePasswordAuthenticationToken;
-        String token = jwtAuthenticationToken.getToken();
+        Jwt jwt = (Jwt) usernamePasswordAuthenticationToken;
+        String token = jwt.getToken();
 
-        JwtRequest jwtRequest = mySecurityUtils.validateJwtRequest(token);
+        RequestJwtDTO requestJwtDTO = mySecurityUtils.validateJwtRequest(token);
 
-        if (jwtRequest == null) {
+        if (requestJwtDTO == null) {
             throw new RuntimeException("JWT Token is incorrect");
         }
 
-        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(jwtRequest.getRole());
-        return new JwtUserDetails(jwtRequest.getUserName(), jwtRequest.getId(), token, grantedAuthorities);
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(requestJwtDTO.getRole());
+        return new JwtUserDetails(requestJwtDTO.getUserName(), requestJwtDTO.getId(), token, grantedAuthorities);
     }
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return (JwtAuthenticationToken.class.isAssignableFrom(aClass));
+        return (Jwt.class.isAssignableFrom(aClass));
     }
 }

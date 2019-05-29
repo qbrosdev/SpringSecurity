@@ -1,12 +1,10 @@
 package com.qbros.jwtSecurity.jwtSecurity;
 
-import com.qbros.controller.dto.JwtAuthenticationToken;
+import com.qbros.controller.dto.Jwt;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.apache.catalina.security.SecurityUtil;
+import io.jsonwebtoken.Jwts;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -15,7 +13,9 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
+
 
 /**
  * Created by V.Ghasemi
@@ -43,7 +43,13 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         }
         //fixme https://github.com/qbrosdev/EJB_Skeletal/blob/master/EJB_HTTP_EndPoint/src/main/java/com/qbros/Shiro/Filter/TokenAuthzFilter.java
         String authenticationToken = header.substring(AUTHORIZATION_TOKEN_MARKER.length());
-        JwtAuthenticationToken token = new JwtAuthenticationToken(authenticationToken);
+        //------------------------------------
+        authenticationToken = authenticationToken.substring(authenticationToken.indexOf(" "));
+        String username = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary("secret"))
+                .parseClaimsJws(authenticationToken).getBody().getSubject();
+        String subjectName = (String) SecurityUtils.getSubject().getPrincipal();
+        -----------------------------------------
+                Jwt token = new Jwt(authenticationToken);
         return getAuthenticationManager().authenticate(token);
     }
 
