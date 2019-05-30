@@ -4,6 +4,7 @@ This is a demo project for spring security and consists of 4 subprojects.
 - Basic
 - Forms
 - JwtServer
+- JpaDB
 
 ## Basic
 
